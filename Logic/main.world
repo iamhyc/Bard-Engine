@@ -1,0 +1,41 @@
+
+Load#src "./Figure.rml"
+
+Scene start
+	this_id#0x01
+	world:
+		Euclidean-3#{640, 640, 1000}, //space {x, y, z}
+		view: 
+			fix#{x, y}
+	light: parallel 3500k fix#{0, 0, 1000}
+	Timeline: #init
+Scene end
+
+World start
+	this_id#"main"
+	Timeline#"0000-0000-0"
+
+	Load "./scene1.world"
+	Load "./scene2.world"
+
+	Sync start
+		this_id#0x01
+		disp#image("./this_time.png", "fade-in#1")
+		disp#music("./this_time.midi", "full")
+		disp#movie("./this_time.mov", "{(0, 0), (320, 320)}", "stretch");
+		place#figure1({0, 0, 0});
+	Sync end
+
+	Scene	disp#0x01
+	render	sync#0x01
+
+	Sync#1000
+
+	render	world#0x01
+	delete	world#0x01
+
+	Timeline#"0000-0001-2" maks#5
+	render
+	delete world#0x02
+
+World end

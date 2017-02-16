@@ -1,0 +1,18 @@
+
+troves
+{
+	UID: 1
+	typo: "Box",
+	name: "trove-box-1",
+	inputSource: "Default|Mouse|Keyboard",
+	resource: "../rml/box",
+	private:
+	{
+		speed: 10,
+	},
+	Script:
+	{
+		"Mouse::LeftClick": typo.toggle("auto"),
+		"Keyboard::ENTER": typo.toggle("auto"),
+	},
+}

@@ -1,0 +1,18 @@
+
+figure1
+{
+	UID: 123456
+	typo: "Human_Body_Kinect",
+	name: "Mark",
+	inputSource: "Default|Mouse|Keyboard",
+	resource: NULL,
+	private:
+	{
+		speed: 10,
+	},
+	Script:
+	{
+		"Mouse::LeftClick": typo.move("arm", "circle#1"),
+		"Keyboard::UpArrow": typo.move("up", this.speed),
+	},
+}
