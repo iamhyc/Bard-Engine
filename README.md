@@ -8,7 +8,11 @@ A simple game engine developed on Qt library, together with python script engine
 
 ### Principle
 
-设计理念：基本的系统认知，输入——处理——输出；
+设计理念：
+
+​	为代码风格，用散文一样的风格写游戏；
+
+​	分离资源、场景、精灵脚本的描述，与**演出**的描述，游戏开发者只需要描述演出，即游戏世界的逻辑；这种快捷的开发，当然需要引擎开发参与者，提供广泛的，高度可定制的模块、插件、封装，以及模型、资源、行为脚本等。
 
 游戏是一种融合演员与观众角色的Play，所以游戏引擎不是Player，Render，不仅仅包含Camera，Scene，Spirit (Character)，Script and etc. 玩家的**选择与参与**是游戏这门艺术的精华 。
 
