@@ -8,7 +8,7 @@ A simple game engine developed on Qt library, together with python script engine
 
 ### Principle
 
-设计理念：
+A. 设计理念：
 
 ​	伪代码风格，用散文一样的文字写游戏；
 
@@ -24,11 +24,26 @@ A simple game engine developed on Qt library, together with python script engine
 
 2. 对于**交互**的部分，包含Camera与Coordinate，输入输出流Buffer，以及最为重要的**渲染引擎**；在这里，要真正的加载描述的**资源信息**，获取用户端的输入，并根据**最终描述**以及**用户输入**，确定Camera的拍摄方式以及特效（摄影分镜），以及Coordinate的变换；Script Engine作为用户输入的辅助，通过python shell的支持，对底层描述进行改写；
 
-   注：这里的python shell经过底层描述(Markup)的定制，只能完成被限制的script操作
+   注：这里的python shell经过底层描述(Markup)的定制，只能完成被限制的script操作;
+
+   Connector面向Interface可禁用，限制用户交互时间与场景
 
 当前系统设计如下图所示：
 
 ![Design](./Design.png)
+
+B. Note
+
+- 顺序加载，依赖计算 ---> 面向对象，栈堆叠
+- 事件响应队列，维护多个优先级队列：I/O Event, Repaint Request Event, Logic Event
+- Input在于设备抽象；Output在于媒介抽象，目前的媒介表达依赖于**2D镜头语言**
+- I/O速率没有限制，但各个抽象Device的Buffer大小限制了速率；连接I/O设备的是逻辑系统
+- 对于操作的连续性，给出**插值估计**，以及消除抖动的**滤波自适应**，并定义无操作响应事件
+- **Timeline字符串+正则匹配**，构成 Logic System 的状态转移，以及连续性增量变化，提高复用率，减少内存运算，提供快速的legal校验
+- 地图及其变换，用**稀疏矩阵**表示，对于背景绘制，采取层级存储，按需加载的机制
+- 将导向Render System的信息，作为反馈加入Logic System，增加系统噪声和**混沌性质**
+- 物理规则的描述，**特征值**化作为 Parity Matrix，快速校验与纠正
+- 面向对象的**粒子特效**，**精灵动画**的封装，面向对象的事件**Hook节点**
 
 ### Developing Process
 
